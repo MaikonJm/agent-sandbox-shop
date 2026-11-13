@@ -1,6 +1,5 @@
 from decimal import Decimal
 
-import pytest
 from fastapi.testclient import TestClient
 
 from shop.main import app
@@ -8,7 +7,6 @@ from shop.main import app
 client = TestClient(app)
 
 
-@pytest.mark.xfail(reason="see issue #1: cart total ignores the quantity of the last item", strict=True)
 def test_add_item_and_total():
     client.post("/cart/c1/items", json={"product_id": 1, "quantity": 2})  # 2 x 19.90
     client.post("/cart/c1/items", json={"product_id": 3, "quantity": 2})  # 2 x 5.00
